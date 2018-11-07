@@ -1,6 +1,6 @@
 package java8.paramsScope;
 
-import lambdaExpression.GreetingService;
+import java8.lambdaExpression.GreetingService;
 import org.junit.Test;
 
 /**
