@@ -8,6 +8,7 @@ import org.junit.Test;
  * @date 2018/9/20 9:58
  */
 public class OptionalIntTest {
+
   @Test
   public void testOf() {
     OptionalInt optionalInt = OptionalInt.of(1);

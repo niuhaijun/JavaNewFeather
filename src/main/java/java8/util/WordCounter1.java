@@ -7,6 +7,7 @@ import java.util.Objects;
  * @date 2018/9/28 17:17
  */
 public class WordCounter1 {
+
   private static long sum;
 
   public static long count(String words) {

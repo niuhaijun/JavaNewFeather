@@ -7,6 +7,7 @@ import java.util.Optional;
  * @date 2018/10/11 17:19
  */
 public class Car {
+
   private Optional<Insurance> insurance;
 
   public Optional<Insurance> getInsurance() {

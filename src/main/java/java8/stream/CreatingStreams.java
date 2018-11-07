@@ -68,7 +68,6 @@ public class CreatingStreams {
         n -> n.add(BigInteger.ONE));
     show("integers", integers);
 
-
     Stream<String> wordsAnotherWay = Pattern.compile("\\PL+").splitAsStream(
         contents);
     show("wordsAnotherWay", wordsAnotherWay);

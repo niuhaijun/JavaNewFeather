@@ -2,7 +2,6 @@ package java8.stream;
 
 import java.util.stream.LongStream;
 import org.junit.Test;
-import sun.util.calendar.LocalGregorianCalendar;
 
 /**
  * @author niuhaijun

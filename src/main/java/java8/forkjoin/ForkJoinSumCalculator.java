@@ -8,11 +8,10 @@ import java.util.concurrent.RecursiveTask;
  */
 public class ForkJoinSumCalculator extends RecursiveTask<Long> {
 
+  public static final long THRESHOLD = 10_000;
   private final long[] numbers;
   private final int start;
   private final int end;
-
-  public static final long THRESHOLD = 10_000;
 
 
   public ForkJoinSumCalculator(long[] numbers) {

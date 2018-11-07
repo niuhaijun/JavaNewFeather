@@ -2,7 +2,6 @@ package java8.optional;
 
 import java.util.Optional;
 import java.util.function.Supplier;
-import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
 import org.junit.Test;
 
 /**

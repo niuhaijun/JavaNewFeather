@@ -139,7 +139,7 @@ public class Jdk8FuncInterface {
    */
   @Test
   public void doubleToIntFunctionTest() {
-    DoubleToIntFunction doubleToIntFunction = (a) -> (int)a;
+    DoubleToIntFunction doubleToIntFunction = (a) -> (int) a;
     Integer b = doubleToIntFunction.applyAsInt(12.34);
     System.out.println(b);
   }
@@ -149,7 +149,7 @@ public class Jdk8FuncInterface {
    */
   @Test
   public void doubleToLongFunctionTest() {
-    DoubleToLongFunction doubleToLongFunction = (d) -> (long)d;
+    DoubleToLongFunction doubleToLongFunction = (d) -> (long) d;
     Long b = doubleToLongFunction.applyAsLong(123.4);
     System.out.println(b);
   }

@@ -6,12 +6,12 @@ package java8.defaultMethod.case4;
  */
 public class C implements A, B {
 
+  public static void main(String[] args) {
+    new C().hello();
+  }
+
   @Override
   public void hello() {
     B.super.hello();
-  }
-
-  public static void main(String[] args) {
-    new C().hello();
   }
 }
