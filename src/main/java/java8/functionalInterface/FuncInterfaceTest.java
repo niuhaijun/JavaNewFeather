@@ -19,11 +19,19 @@ public class FuncInterfaceTest {
 
   /**
    * lambda表达式抛出异常
+   * 任何函数式接口都不允许抛出受检异常
    */
   @Test
   public void test1() {
+
+    /**
+     * 自定义的函数式接口
+     */
     BufferedReaderProcessor brp = br -> br.readLine();
 
+    /**
+     * 系统预定义的函数式接口
+     */
     Function<BufferedReader, String> f = (BufferedReader br) -> {
       try {
         return br.readLine();
@@ -38,6 +46,7 @@ public class FuncInterfaceTest {
    */
   @Test
   public void test2() {
+
     List<String> list = new ArrayList<>();
 
     Predicate<String> predicate = s -> list.add(s);
