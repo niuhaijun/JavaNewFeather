@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import org.junit.Test;
@@ -115,11 +116,15 @@ public class LambdaTest {
     triples.forEach(e -> System.out.println(e[0] + ", " + e[1] + ", " + e[2]));
   }
 
+  /**
+   * 斐波那契数列
+   */
   @Test
   public void testFib() {
 
-    Stream.iterate(new int[]{0, 1}, t -> new int[]{t[1], t[0] + t[1]})
-        .limit(10).map(e -> e[0]).forEach(e -> System.out.print(e + ", "));
+    String str = Stream.iterate(new long[]{0, 1}, t -> new long[]{t[1], t[0] + t[1]})
+        .limit(20).map(e -> e[0] + "").collect(Collectors.joining(", "));
+    System.out.println(str);
   }
 
 }
