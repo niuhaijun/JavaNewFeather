@@ -32,6 +32,7 @@ public class Jdk8FuncInterface {
    */
   @Test
   public void biConsumerTest() {
+
     BiConsumer<String, Integer> biConsumer = (a, b) -> System.out.println(a + b);
     biConsumer.accept("12", 34);
   }
@@ -41,6 +42,7 @@ public class Jdk8FuncInterface {
    */
   @Test
   public void biFunctionTest() {
+
     BiFunction<String, String, Integer> biFunction = (a, b) -> Integer.valueOf(a) + Integer
         .valueOf(b);
     Integer sum = biFunction.apply("1200", "34");
@@ -52,6 +54,7 @@ public class Jdk8FuncInterface {
    */
   @Test
   public void binaryOperatorTest() {
+
     BinaryOperator<Integer> max = BinaryOperator.maxBy(Comparator.naturalOrder());
     System.out.println(max.apply(1, 2));
 
@@ -67,6 +70,7 @@ public class Jdk8FuncInterface {
    */
   @Test
   public void biPredicateTest() {
+
     BiPredicate<String, Integer> biPredicate = Objects::equals;
     System.out.println(biPredicate.test("123", 123));
   }
@@ -76,6 +80,7 @@ public class Jdk8FuncInterface {
    */
   @Test
   public void booleanSupplierTest() {
+
     BooleanSupplier booleanSupplier = () -> Boolean.FALSE;
     System.out.println(booleanSupplier.getAsBoolean());
   }
@@ -85,6 +90,7 @@ public class Jdk8FuncInterface {
    */
   @Test
   public void consumerTest() {
+
     Consumer<String> consumer = System.out::println;
     consumer.accept("hello world !!!");
   }
@@ -94,6 +100,7 @@ public class Jdk8FuncInterface {
    */
   @Test
   public void doubleBinaryOperatorTest() {
+
     DoubleBinaryOperator sum = (a, b) -> a + b;
     System.out.println(sum.applyAsDouble(1.1, 2.2));
   }
@@ -103,6 +110,7 @@ public class Jdk8FuncInterface {
    */
   @Test
   public void doubleConsumerTest() {
+
     DoubleConsumer doubleConsumer = System.out::println;
     doubleConsumer.accept(12.34);
   }
@@ -112,6 +120,7 @@ public class Jdk8FuncInterface {
    */
   @Test
   public void doubleFunctionTest() {
+
     DoubleFunction<Long> doubleFunction = Double::doubleToLongBits;
     System.out.println(doubleFunction.apply(1234.5678));
   }
@@ -121,6 +130,7 @@ public class Jdk8FuncInterface {
    */
   @Test
   public void doublePredicateTest() {
+
     DoublePredicate doublePredicate = (a) -> a > 100;
     System.out.println(doublePredicate.test(11));
   }
@@ -130,6 +140,7 @@ public class Jdk8FuncInterface {
    */
   @Test
   public void doubleSupplierTest() {
+
     DoubleSupplier doubleSupplier = () -> Double.valueOf("111");
     System.out.println(doubleSupplier.getAsDouble());
   }
@@ -139,6 +150,7 @@ public class Jdk8FuncInterface {
    */
   @Test
   public void doubleToIntFunctionTest() {
+
     DoubleToIntFunction doubleToIntFunction = (a) -> (int) a;
     Integer b = doubleToIntFunction.applyAsInt(12.34);
     System.out.println(b);
@@ -149,6 +161,7 @@ public class Jdk8FuncInterface {
    */
   @Test
   public void doubleToLongFunctionTest() {
+
     DoubleToLongFunction doubleToLongFunction = (d) -> (long) d;
     Long b = doubleToLongFunction.applyAsLong(123.4);
     System.out.println(b);
@@ -160,6 +173,7 @@ public class Jdk8FuncInterface {
    */
   @Test
   public void functionTest() {
+
     Function<String, Integer> function = Integer::valueOf;
     Integer num = function.apply("123");
     System.out.println(num);
@@ -167,6 +181,7 @@ public class Jdk8FuncInterface {
 
   @Test
   public void unaryOperatorTest() {
+
     UnaryOperator<String> unaryOperator = null;
   }
 }

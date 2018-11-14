@@ -31,6 +31,7 @@ public class Jdk7FuncInterface {
    */
   @Test
   public void runnableTest() {
+
     Runnable runnable = () -> System.out.println("Runnable");
     Thread thread = new Thread(runnable);
     thread.run();
@@ -41,6 +42,7 @@ public class Jdk7FuncInterface {
    */
   @Test
   public void callableTest() throws ExecutionException, InterruptedException {
+
     Callable<Integer> callable = () -> 1 + 2;
     FutureTask<Integer> futureTask = new FutureTask<>(callable);
     Executor executor = Executors.newSingleThreadExecutor();
@@ -55,6 +57,7 @@ public class Jdk7FuncInterface {
    */
   @Test
   public void privilegedActionTest() {
+
     PrivilegedAction privilegedAction = null;
   }
 
@@ -63,6 +66,7 @@ public class Jdk7FuncInterface {
    */
   @Test
   public void comparatorTest() {
+
     Comparator<Integer> comparator = Integer::compareTo;
     List<Integer> list = Arrays.asList(3, 2, 1);
     Collections.sort(list, comparator);
@@ -75,6 +79,7 @@ public class Jdk7FuncInterface {
    */
   @Test
   public void fileFilterTest() {
+
     FileFilter fileFilter = null;
   }
 
@@ -83,6 +88,7 @@ public class Jdk7FuncInterface {
    */
   @Test
   public void pathMatcherTest() {
+
     PathMatcher pathMatcher = null;
   }
 
@@ -91,6 +97,7 @@ public class Jdk7FuncInterface {
    */
   @Test
   public void invocationHandlerTest() {
+
     InvocationHandler invocationHandler = null;
   }
 
@@ -99,6 +106,7 @@ public class Jdk7FuncInterface {
    */
   @Test
   public void propertyChangeListenerTest() {
+
     PropertyChangeListener propertyChangeListener = null;
   }
 
@@ -107,6 +115,7 @@ public class Jdk7FuncInterface {
    */
   @Test
   public void actionListenerTest() {
+
     ActionListener actionListener = null;
   }
 
@@ -115,6 +124,7 @@ public class Jdk7FuncInterface {
    */
   @Test
   public void changeListenerTest() {
+
     ChangeListener changeListener = null;
   }
 

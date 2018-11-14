@@ -11,6 +11,7 @@ public class WordCounter1 {
   private static long sum;
 
   public static long count(String words) {
+
     if (Objects.isNull(words) || "".equals(words)) {
       return sum;
     }
@@ -30,6 +31,7 @@ public class WordCounter1 {
   }
 
   public static void main(String[] args) {
+
     String words = "A b c d ";
     System.out.println(WordCounter1.count(words));
   }

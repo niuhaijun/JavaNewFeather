@@ -33,6 +33,7 @@ public class PrimeNumbersCollector implements
    * @return 返回一个list
    */
   public static <E> List<E> takeWhile(List<E> list, Predicate<E> p) {
+
     int i = 0;
     for (E e : list) {
       if (!p.test(e)) {
@@ -52,6 +53,7 @@ public class PrimeNumbersCollector implements
    * @return 返回一个布尔值
    */
   public static boolean isPrime(List<Integer> primes, int candidate) {
+
     int candidateRoot = (int) Math.sqrt(candidate);
     return takeWhile(primes, e -> e <= candidateRoot).stream().noneMatch(e -> candidate % e == 0);
   }
@@ -59,6 +61,7 @@ public class PrimeNumbersCollector implements
 
   @Override
   public Supplier<Map<Boolean, List<Integer>>> supplier() {
+
     return () -> new HashMap<Boolean, List<Integer>>() {{
       put(Boolean.TRUE, new ArrayList<>());
       put(Boolean.FALSE, new ArrayList<>());
@@ -67,12 +70,14 @@ public class PrimeNumbersCollector implements
 
   @Override
   public BiConsumer<Map<Boolean, List<Integer>>, Integer> accumulator() {
+
     return (Map<Boolean, List<Integer>> acc, Integer candidate) ->
         acc.get(isPrime(acc.get(Boolean.TRUE), candidate)).add(candidate);
   }
 
   @Override
   public BinaryOperator<Map<Boolean, List<Integer>>> combiner() {
+
     return (m1, m2) -> {
       m1.get(Boolean.TRUE).addAll(m2.get(Boolean.TRUE));
       m1.get(Boolean.FALSE).addAll(m2.get(Boolean.FALSE));
@@ -82,11 +87,13 @@ public class PrimeNumbersCollector implements
 
   @Override
   public Function<Map<Boolean, List<Integer>>, Map<Boolean, List<Integer>>> finisher() {
+
     return Function.identity();
   }
 
   @Override
   public Set<Characteristics> characteristics() {
+
     return Collections.unmodifiableSet(EnumSet.of(IDENTITY_FINISH, CONCURRENT));
   }
 }

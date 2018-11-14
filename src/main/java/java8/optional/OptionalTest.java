@@ -25,6 +25,7 @@ public class OptionalTest {
    */
   @Test
   public void test1() {
+
     Optional<String> optional = Optional.empty();
     if (optional.isPresent()) {
       System.out.println(optional.get());
@@ -38,6 +39,7 @@ public class OptionalTest {
    */
   @Test
   public void test2() {
+
     Optional<Integer> optional1 = Optional.of(1);
     Optional<Integer> optional2 = Optional.of(1);
     System.out.println(optional1.equals(optional2));
@@ -50,6 +52,7 @@ public class OptionalTest {
    */
   @Test
   public void test3() {
+
     Optional<Integer> optional = Optional.of(1);
     optional = optional.filter(t -> t > 0);
     if (optional.isPresent()) {
@@ -64,6 +67,7 @@ public class OptionalTest {
    */
   @Test
   public void test4() {
+
     Optional<Integer> optional = Optional.ofNullable(3);
     Optional<Integer> result = optional.flatMap(t -> Optional.of(t * t));
     System.out.println(result.get());
@@ -76,6 +80,7 @@ public class OptionalTest {
    */
   @Test
   public void test5() {
+
     Optional<String> optional = Optional.of("123");
     if (optional.isPresent()) {
       System.out.println(optional.get());
@@ -89,6 +94,7 @@ public class OptionalTest {
    */
   @Test
   public void test6() {
+
     Optional<Integer> optional = Optional.of(123);
     if (optional.isPresent()) {
       System.out.println(optional.hashCode());
@@ -102,6 +108,7 @@ public class OptionalTest {
    */
   @Test
   public void test7() {
+
     Optional<String> optional = Optional.of("123");
     optional.ifPresent(System.out::println);
   }
@@ -113,6 +120,7 @@ public class OptionalTest {
    */
   @Test
   public void test8() {
+
     Optional<String> optional = Optional.ofNullable("ssss");
     if (optional.isPresent()) {
       System.out.println(optional.get());
@@ -126,6 +134,7 @@ public class OptionalTest {
    */
   @Test
   public void test9() {
+
     Optional<Integer> optional = Optional.of(2);
     optional = optional.map(t -> t * t);
     if (optional.isPresent()) {
@@ -140,6 +149,7 @@ public class OptionalTest {
    */
   @Test
   public void test10() {
+
     Optional<Integer> optional = Optional.of(123);
     System.out.println(optional.get());
   }
@@ -151,6 +161,7 @@ public class OptionalTest {
    */
   @Test
   public void test11() {
+
     Optional<String> optional = Optional.ofNullable(null);
     if (optional.isPresent()) {
       System.out.println(optional.get());
@@ -167,6 +178,7 @@ public class OptionalTest {
    */
   @Test
   public void test12() {
+
     Optional<Integer> optional = Optional.ofNullable(null);
     System.out.println(optional.orElse(234));
   }
@@ -178,6 +190,7 @@ public class OptionalTest {
    */
   @Test
   public void test13() {
+
     Optional<String> optional = Optional.ofNullable(null);
     Supplier<String> supplier = () -> "123";
     System.out.println(optional.orElseGet(supplier));
@@ -190,6 +203,7 @@ public class OptionalTest {
    */
   @Test
   public void test14() {
+
   }
 
   /**
@@ -199,6 +213,7 @@ public class OptionalTest {
    */
   @Test
   public void test15() {
+
     Optional<Integer> optional = Optional.ofNullable(null);
     System.out.println(optional.toString());
   }

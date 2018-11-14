@@ -13,11 +13,13 @@ public class WordCounter2 {
   private final boolean lastSpace;
 
   public WordCounter2(int counter, boolean lastSpace) {
+
     this.counter = counter;
     this.lastSpace = lastSpace;
   }
 
   private static int countWords(Stream<Character> stream) {
+
     WordCounter2 wc = stream
         .reduce(new WordCounter2(0, true), WordCounter2::accumulate, WordCounter2::combine);
 
@@ -25,12 +27,14 @@ public class WordCounter2 {
   }
 
   public static void main(String[] args) {
+
     String words = "A b c d ee";
     System.out.println(
         WordCounter2.countWords(IntStream.range(0, words.length()).mapToObj(words::charAt)));
   }
 
   public WordCounter2 accumulate(Character c) {
+
     if (Character.isWhitespace(c)) {
       return lastSpace ? this : new WordCounter2(counter, true);
     } else {
@@ -39,10 +43,12 @@ public class WordCounter2 {
   }
 
   public WordCounter2 combine(WordCounter2 other) {
+
     return new WordCounter2(counter + other.getCounter(), false);
   }
 
   public int getCounter() {
+
     return counter;
   }
 }

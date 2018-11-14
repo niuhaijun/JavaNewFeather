@@ -14,6 +14,7 @@ public class DefaultMethodTest {
 
   @Test
   public void test() {
+
     Vehicle vehicle = new Car();
     vehicle.print();
   }

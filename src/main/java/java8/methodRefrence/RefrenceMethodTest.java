@@ -15,6 +15,7 @@ public class RefrenceMethodTest {
    */
   @Test
   public void test1() {
+
     Car car = Car.create(Car::new);
     System.out.println(car);
   }
@@ -24,6 +25,7 @@ public class RefrenceMethodTest {
    */
   @Test
   public void test2() {
+
     Car car = Car.create(Car::new);
     List<Car> cars = Arrays.asList(car);
     cars.forEach(Car::collide);
@@ -34,6 +36,7 @@ public class RefrenceMethodTest {
    */
   @Test
   public void test3() {
+
     Car car = Car.create(Car::new);
     List<Car> cars = Arrays.asList(car);
     cars.forEach(Car::repair);
@@ -44,6 +47,7 @@ public class RefrenceMethodTest {
    */
   @Test
   public void test4() {
+
     Car car = Car.create(Car::new);
     List<Car> cars = Arrays.asList(car);
     cars.forEach(car::follow);
@@ -54,6 +58,7 @@ public class RefrenceMethodTest {
    */
   @Test
   public void test5() {
+
     List<String> names = new ArrayList<>();
     names.add("Google");
     names.add("Sina");

@@ -7,6 +7,7 @@ package java8.defaultMethod.case1;
 public class C implements A, B {
 
   public static void main(String[] args) {
+
     new C().hello();
   }
 }

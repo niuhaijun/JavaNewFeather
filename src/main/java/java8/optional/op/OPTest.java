@@ -11,6 +11,7 @@ public class OPTest {
 
   @Test
   public void testMap() {
+
     Insurance insurance = new Insurance();
     Optional<Insurance> optInsurance = Optional.of(insurance);
 
@@ -20,6 +21,7 @@ public class OPTest {
 
   @Test
   public void testFlatMap() {
+
     Person person = new Person();
     Optional<Person> optPerson = Optional.of(person);
 

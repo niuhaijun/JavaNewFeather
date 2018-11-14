@@ -14,6 +14,7 @@ import org.junit.Test;
 public class LambdaTest {
 
   private static int operate(int a, int b, MathOperation mathOperation) {
+
     return mathOperation.operation(a, b);
   }
 
@@ -22,6 +23,7 @@ public class LambdaTest {
    */
   @Test
   public void test0() {
+
     MathOperation add = (int a, int b) -> {
       return a + b;
     };
@@ -34,6 +36,7 @@ public class LambdaTest {
    */
   @Test
   public void test1() {
+
     MathOperation sub = (int a, int b) -> a - b;
     int result = LambdaTest.operate(2, 1, sub);
     System.out.println(result);
@@ -44,6 +47,7 @@ public class LambdaTest {
    */
   @Test
   public void test2() {
+
     MathOperation mul = (a, b) -> {
       return a * b;
     };
@@ -56,6 +60,7 @@ public class LambdaTest {
    */
   @Test
   public void test3() {
+
     GreetingService service1 = message -> System.out.println(message);
     service1.say("菜鸟你好！！！");
 
@@ -72,6 +77,7 @@ public class LambdaTest {
    */
   @Test
   public void test4() {
+
     MathOperation add = (a, b) -> a + b;
     System.out.println(LambdaTest.operate(1, 2, add));
 
@@ -90,6 +96,7 @@ public class LambdaTest {
    */
   @Test
   public void testVoidMatchConfig() {
+
     List<String> list = new ArrayList<>();
     Predicate<String> p = s -> list.add(s);
     Consumer<String> b = s -> list.add(s);
@@ -100,6 +107,7 @@ public class LambdaTest {
    */
   @Test
   public void testGouGu() {
+
     Stream<int[]> triples = IntStream.rangeClosed(1, 100)
         .boxed().flatMap(a -> IntStream.rangeClosed(a, 100)
             .filter(b -> Math.sqrt(a * a + b * b) % 1 == 0)
@@ -109,6 +117,7 @@ public class LambdaTest {
 
   @Test
   public void testFib() {
+
     Stream.iterate(new int[]{0, 1}, t -> new int[]{t[1], t[0] + t[1]})
         .limit(10).map(e -> e[0]).forEach(e -> System.out.print(e + ", "));
   }

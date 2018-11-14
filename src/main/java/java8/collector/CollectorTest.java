@@ -13,6 +13,7 @@ public class CollectorTest {
 
   @Test
   public void test() {
+
     Map<Boolean, List<Integer>> map = IntStream.rangeClosed(2, 10).boxed()
         .collect(new PrimeNumbersCollector());
     map.get(Boolean.TRUE).stream().forEach(System.out::println);

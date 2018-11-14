@@ -18,6 +18,7 @@ public class CountLongWords {
 
   @Test
   public void test() throws IOException {
+
     String contents = new String(Files.readAllBytes(
         Paths.get("D:/IdeaWorkSpace/Java8/src/main/java/files/alice30.txt")),
         StandardCharsets.UTF_8);

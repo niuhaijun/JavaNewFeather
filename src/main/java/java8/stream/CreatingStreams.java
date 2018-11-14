@@ -20,6 +20,7 @@ import java.util.stream.Stream;
 public class CreatingStreams {
 
   public static <T> void show(String title, Stream<T> stream) {
+
     final int SIZE = 10;
     List<T> firstElements = stream
         .limit(SIZE + 1)
@@ -39,6 +40,7 @@ public class CreatingStreams {
   }
 
   public static void main(String[] args) throws IOException {
+
     Path path = Paths.get("D:/IdeaWorkSpace/Java8/src/main/java/files/alice30.txt");
     String contents = new String(Files.readAllBytes(path),
         StandardCharsets.UTF_8);

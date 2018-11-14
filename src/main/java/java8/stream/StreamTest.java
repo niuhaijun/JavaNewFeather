@@ -72,6 +72,7 @@ public class StreamTest {
    */
   @Test
   public void filterTest() {
+
     count = strings.stream().filter(String::isEmpty).count();
     System.out.println("空字符串数量为: " + count);
 
@@ -86,6 +87,7 @@ public class StreamTest {
    */
   @Test
   public void mapTest() {
+
     List<Integer> squaresList = numbers.stream().map(i -> i * i)
         .collect(toList());
     System.out.println("Squares List: " + squaresList);
@@ -102,6 +104,7 @@ public class StreamTest {
    */
   @Test
   public void flatMapTest() {
+
     Stream<String> stream = Stream.of("Q,Q,Q", "W,W,W", "E,E,E");
 //    stream.flatMap(s -> Stream.of(s.split(","))).forEach(System.out::println);
     stream.map(s -> s.split(",")).flatMap(ss -> Stream.of(ss)).forEach(System.out::println);
@@ -114,6 +117,7 @@ public class StreamTest {
    */
   @Test
   public void limitTest() {
+
     Stream<String> stream = strings.stream();
     stream.limit(3).forEach(System.out::println);
   }
@@ -125,6 +129,7 @@ public class StreamTest {
    */
   @Test
   public void skipTest() {
+
     Stream<Integer> stream = integers.stream();
     stream.skip(3).forEach(System.out::println);
   }
@@ -136,6 +141,7 @@ public class StreamTest {
    */
   @Test
   public void concatTest() {
+
     Stream<Object> stream = Stream.concat(strings.stream(), numbers.stream());
     stream.forEach(System.out::println);
   }
@@ -147,6 +153,7 @@ public class StreamTest {
    */
   @Test
   public void distinctTest() {
+
     Stream<String> stream = strings.stream();
     stream.distinct().forEach(System.out::println);
   }
@@ -158,6 +165,7 @@ public class StreamTest {
    */
   @Test
   public void sortedTest() {
+
     Stream<String> stringStream = strings.stream().sorted();
     stringStream.forEach(System.out::println);
 
@@ -174,6 +182,7 @@ public class StreamTest {
    */
   @Test
   public void peekTest() {
+
     Stream<Integer> integerStream = integers.stream();
     integerStream.peek(t -> t = t - 100).forEach(System.out::println);
   }
@@ -185,6 +194,7 @@ public class StreamTest {
    */
   @Test
   public void maxTest() {
+
     Stream<Integer> integerStream = integers.stream();
     Optional<Integer> optional = integerStream.max(Comparator.naturalOrder());
     if (optional.isPresent()) {
@@ -199,6 +209,7 @@ public class StreamTest {
    */
   @Test
   public void minTest() {
+
     Stream<Integer> integerStream = integers.stream();
     Optional<Integer> optional = integerStream.min(Comparator.naturalOrder());
     if (optional.isPresent()) {
@@ -213,6 +224,7 @@ public class StreamTest {
    */
   @Test
   public void findFirstTest() {
+
     Optional<String> optional = strings.stream().findFirst();
     if (optional.isPresent()) {
       System.out.println(optional.get());
@@ -226,6 +238,7 @@ public class StreamTest {
    */
   @Test
   public void findAnyTest() {
+
     Stream<Integer> integerStream = integers.parallelStream();
     Optional<Integer> optional = integerStream.findAny();
     if (optional.isPresent()) {
@@ -240,6 +253,7 @@ public class StreamTest {
    */
   @Test
   public void anyMatchTest() {
+
     Stream<Integer> integerStream = integers.parallelStream();
 //    integerStream = Stream.empty();
     System.out.println(integerStream.anyMatch(t -> t == 19));
@@ -252,6 +266,7 @@ public class StreamTest {
    */
   @Test
   public void allMatchTest() {
+
     Stream<String> stringStream = strings.stream();
     System.out.println(stringStream.allMatch(Objects::isNull));
   }
@@ -263,6 +278,7 @@ public class StreamTest {
    */
   @Test
   public void noneMatchTest() {
+
     boolean result = strings.parallelStream().noneMatch(s -> s.length() > 100);
     System.out.println(result);
   }
@@ -274,6 +290,7 @@ public class StreamTest {
    */
   @Test
   public void iteratorTest() {
+
     Stream<String> stringStream = strings.stream();
     Iterator<String> iterator = stringStream.iterator();
     while (iterator.hasNext()) {
@@ -291,6 +308,7 @@ public class StreamTest {
    */
   @Test
   public void forEachTest() {
+
     integers.stream().limit(4).sorted().forEach(System.out::println);
 
     random.ints(3).sorted().forEach(System.out::println);
@@ -301,6 +319,7 @@ public class StreamTest {
    */
   @Test
   public void forEachOrderedTest() {
+
     integers.stream().limit(4).sorted().forEachOrdered(System.out::println);
 
     random.ints(3).sorted().forEachOrdered(System.out::println);
@@ -315,6 +334,7 @@ public class StreamTest {
    */
   @Test
   public void collectTest() {
+
     List<String> filtered = strings.stream().filter(string -> !string.isEmpty())
         .collect(toList());
     System.out.println("筛选后的列表: " + filtered);
@@ -334,6 +354,7 @@ public class StreamTest {
    */
   @Test
   public void statisticsTest() {
+
     IntSummaryStatistics stats = integers.stream().mapToInt((x) -> x).summaryStatistics();
     System.out.println("列表中最大的数 : " + stats.getMax());
     System.out.println("列表中最小的数 : " + stats.getMin());
@@ -347,6 +368,7 @@ public class StreamTest {
    */
   @Test
   public void parallelStreamTest() {
+
     count = strings.parallelStream().filter(String::isEmpty).count();
     System.out.println("空字符串的数量为: " + count);
   }
@@ -354,6 +376,7 @@ public class StreamTest {
 
   @Test
   public void objectsTest() throws ParseException {
+
     int i = 1;
     Integer ii = 1;
 //    System.out.println(Objects.equals(i, ii));
@@ -376,6 +399,7 @@ public class StreamTest {
    */
   @Test
   public void test11() {
+
     IntStream stream = IntStream.rangeClosed(0, 10);
     stream.filter(e -> e > 2).forEach(System.out::println);
   }
@@ -385,6 +409,7 @@ public class StreamTest {
    */
   @Test
   public void test12() {
+
     IntStream.rangeClosed(1, 100).boxed()
         .flatMap(a -> IntStream.rangeClosed(a, 100).filter(b -> Math.sqrt(a * a + b * b) % 1 == 0)
             .mapToObj(b -> new int[]{a, b, (int) Math.sqrt(a * a + b * b)}));
@@ -401,6 +426,7 @@ public class StreamTest {
    */
   @Test
   public void test13() {
+
     Map<String, Integer> map = Stream.of("A,A,A,b", "b,b,b").flatMap(e -> Stream.of(e.split(",")))
         .collect(
             groupingBy(e -> e, collectingAndThen(toList(), List::size)));

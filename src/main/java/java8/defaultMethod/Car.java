@@ -12,6 +12,7 @@ public class Car implements Vehicle, FourWheeler {
    * 解决多个接口默认方法的冲突：使用 super 来调用指定接口的默认方法：
    */
   public void print() {
+
     Vehicle.super.print();
     FourWheeler.super.print();
     Vehicle.blowHorn();

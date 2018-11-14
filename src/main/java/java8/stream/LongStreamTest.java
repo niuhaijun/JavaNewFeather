@@ -11,6 +11,7 @@ public class LongStreamTest {
 
   @Test
   public void testRange() {
+
     LongStream longStream = LongStream.range(1, 10);
     longStream.forEach(System.out::println);
   }

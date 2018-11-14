@@ -15,6 +15,7 @@ public class ParamScopeTest {
    */
   @Test
   public void test1() {
+
     GreetingService service = System.out::println;
     service.say(image + " niu sir");
   }
@@ -24,6 +25,7 @@ public class ParamScopeTest {
    */
   @Test
   public void test2() {
+
     final int num = 1;
     Converter<Integer, String> s = (param) -> System.out.println(String.valueOf(param + num));
     s.convert(2);  // 输出结果为 3
@@ -34,6 +36,7 @@ public class ParamScopeTest {
    */
   @Test
   public void test3() {
+
     int num = 2;
     Converter<Integer, String> s = (param) -> System.out.println(String.valueOf(param + num));
     s.convert(2);
@@ -48,6 +51,7 @@ public class ParamScopeTest {
    */
   @Test
   public void test4() {
+
     String first = "";
 //    编译会出错
 //    Comparator<String> comparator = (first, second) -> Integer.compare(first.length(), second.length());

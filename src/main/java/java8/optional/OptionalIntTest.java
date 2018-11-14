@@ -11,6 +11,7 @@ public class OptionalIntTest {
 
   @Test
   public void testOf() {
+
     OptionalInt optionalInt = OptionalInt.of(1);
     System.out.println(optionalInt.getAsInt());
   }

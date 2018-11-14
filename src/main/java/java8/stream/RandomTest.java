@@ -12,6 +12,7 @@ public class RandomTest {
 
   @Test
   public void testInts() {
+
     Random random = new Random(1);
     IntStream intStream = random.ints().limit(3);
     intStream.forEach(System.out::println);

@@ -7,6 +7,7 @@ package java8.defaultMethod.case1;
 public interface A {
 
   default void hello() {
+
     System.out.println("A");
   }
 }

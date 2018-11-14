@@ -15,10 +15,12 @@ public class ForkJoinSumCalculator extends RecursiveTask<Long> {
 
 
   public ForkJoinSumCalculator(long[] numbers) {
+
     this(numbers, 0, numbers.length);
   }
 
   private ForkJoinSumCalculator(long[] numbers, int start, int end) {
+
     this.numbers = numbers;
     this.start = start;
     this.end = end;
@@ -27,6 +29,7 @@ public class ForkJoinSumCalculator extends RecursiveTask<Long> {
 
   @Override
   protected Long compute() {
+
     int length = end - start;
 
     if (length <= THRESHOLD) {
@@ -49,6 +52,7 @@ public class ForkJoinSumCalculator extends RecursiveTask<Long> {
    * @return 小数组的和
    */
   private long computeSequentially() {
+
     long sum = 0;
     for (int i = start; i < end; i++) {
       sum += numbers[i];

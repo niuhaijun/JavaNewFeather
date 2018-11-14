@@ -11,6 +11,7 @@ public class DoubleStreamTest {
 
   @Test
   public void testRange() {
+
     DoubleStream doubleStream = DoubleStream.of(1, 2, 3);
     doubleStream.forEach(System.out::println);
   }

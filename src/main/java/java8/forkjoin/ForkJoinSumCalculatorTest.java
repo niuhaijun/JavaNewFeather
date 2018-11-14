@@ -13,6 +13,7 @@ public class ForkJoinSumCalculatorTest {
 
   @Test
   public void test() {
+
     long n = 10_0000_000;
     long[] numbers = LongStream.rangeClosed(1, n).toArray();
     ForkJoinSumCalculator task = new ForkJoinSumCalculator(numbers);
