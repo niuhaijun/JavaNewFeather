@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
@@ -373,6 +374,36 @@ public class StreamTest {
     System.out.println("空字符串的数量为: " + count);
   }
 
+  /**
+   * 将流转化为数组
+   */
+  @Test
+  public void toArrayTest() {
+
+    List<String> list = new ArrayList<String>(3) {
+      {
+        add("one");
+        add("two");
+        add("three");
+      }
+    };
+
+    /**
+     * stream --> array
+     */
+    String[] arr1 = list.stream().toArray(size -> new String[size]);
+
+    /**
+     * list --> array  注意数组长度
+     */
+    String[] arr2 = new String[3];
+    list.toArray(arr2);
+
+    System.out.println(Arrays.toString(arr1));
+    System.out.println(Arrays.toString(arr2));
+
+  }
+
 
   @Test
   public void objectsTest() throws ParseException {
@@ -392,7 +423,6 @@ public class StreamTest {
     System.out.println((date.compareTo(startDate) > 0) && (date.compareTo(endDate) < 0));
 
   }
-
 
   /**
    * filter方法只会过滤小不满足条件的元素
