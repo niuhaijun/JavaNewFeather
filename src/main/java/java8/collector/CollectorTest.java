@@ -1,6 +1,5 @@
 package java8.collector;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -35,7 +34,6 @@ public class CollectorTest {
 
     System.out.println(map.get(Boolean.TRUE));
   }
-
 
   /**
    * 判断一个数是否为素数
