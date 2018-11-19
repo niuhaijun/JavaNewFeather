@@ -404,6 +404,16 @@ public class StreamTest {
 
   }
 
+  /**
+   * string转字符流
+   */
+  @Test
+  public void stringToStream() {
+    String str = "我爱你";
+    Stream<Character> stream = IntStream.range(0, str.length()).mapToObj(str::charAt);
+    stream.forEach(System.out::println);
+  }
+
 
   @Test
   public void objectsTest() throws ParseException {
