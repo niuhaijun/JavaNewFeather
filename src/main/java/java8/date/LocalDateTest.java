@@ -159,7 +159,6 @@ public class LocalDateTest {
 
   }
 
-
   @Test
   public void testPlusAndMinus() {
 
