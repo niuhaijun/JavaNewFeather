@@ -6,6 +6,7 @@ import static java.time.temporal.ChronoField.DAY_OF_YEAR;
 import static java.time.temporal.ChronoField.MONTH_OF_YEAR;
 import static java.time.temporal.ChronoField.YEAR;
 
+import java.time.Clock;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,6 +40,12 @@ public class LocalDateTest {
      */
     LocalDate date1 = LocalDate.now(ZoneId.of("Pacific/Guadalcanal"));
     System.out.println(date1);
+
+    /**
+     *
+     */
+    LocalDate date2 = LocalDate.now(Clock.systemDefaultZone());
+    System.out.println(date2);
   }
 
   @Test
@@ -117,8 +124,10 @@ public class LocalDateTest {
     System.out.println("year = " + year + "; " + date.get(YEAR));
 
     Month month = date.getMonth();
-    int monthOfYear = month.getValue();
-    System.out.println("monthOfYear = " + monthOfYear + "; " + date.get(MONTH_OF_YEAR));
+    int monthOfYear0 = month.getValue();
+    int monthOfYear1 = date.getMonthValue();
+    System.out.println("monthOfYear0 = " + monthOfYear0 + "; " + date.get(MONTH_OF_YEAR));
+    System.out.println("monthOfYear1 = " + monthOfYear1 + "; " + date.get(MONTH_OF_YEAR));
 
     int dayOfYear = date.getDayOfYear();
     System.out.println("dayOfYear = " + dayOfYear + "; " + date.get(DAY_OF_YEAR));
