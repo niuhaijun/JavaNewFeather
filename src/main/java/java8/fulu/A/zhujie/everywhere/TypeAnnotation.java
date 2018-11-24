@@ -1,8 +1,6 @@
-package java8.fulu.A.zhujie.everywhere;
+package java8.fulu.a.zhujie.everywhere;
 
 import com.sun.istack.internal.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 类型注解，顾名思义就是可以当作"类型"使用了。

@@ -1,4 +1,4 @@
-package java8.fulu.A.zhujie.repeatannotation;
+package java8.fulu.a.zhujie.repeatannotation;
 
 /**
  * 重复注解的容器注解

@@ -1,4 +1,4 @@
-package java8.fulu.A.zhujie.repeatannotation;
+package java8.fulu.a.zhujie.repeatannotation;
 
 import java.lang.annotation.Repeatable;
 
