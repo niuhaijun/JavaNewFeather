@@ -1,0 +1,32 @@
+JDK8类库更新
+
+Map
+  getOrDefault
+  forEach
+  compute
+  computeIfAbsent
+  computeIfPresent
+  merge
+  putIfAbsent
+  remove(key, value)
+  repalce
+  replaceAll
+
+Iterable
+  forEach
+  Spliterator
+
+Iterator
+  forEachRemaining
+
+Collection
+  removeIf
+  stream
+  parallelStream
+
+List
+  sort
+  repalceAll
+
+BitSet
+  stream
