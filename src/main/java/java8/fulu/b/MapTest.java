@@ -23,7 +23,6 @@ import org.junit.Test;
  */
 public class MapTest {
 
-
   private Map<String, String> getMap() {
 
     Map<String, String> map = new HashMap<String, String>() {
@@ -37,11 +36,10 @@ public class MapTest {
     return map;
   }
 
-
   /**
    * getOrDefault
    *  如果不存在，返回默认的值
-   *  如果存在,就返回获取到的值
+   *  如果存在，就返回获取到的值
    */
   @Test
   public void testGetOrDefault() {
@@ -49,13 +47,16 @@ public class MapTest {
     Map<String, String> map = getMap();
 
     String value0 = map.get("ni");
-    System.out.println(value0);
+    System.out.println("value0 == " + value0);
 
     String value1 = map.get("niu");
-    System.out.println(value1);
+    System.out.println("value1 == " + value1);
 
     String value2 = map.getOrDefault("ni", "niu_huang");
-    System.out.println(value2);
+    System.out.println("value2 == " + value2);
+
+    String value3 = map.getOrDefault("niu", "niu_huang");
+    System.out.println("value2 == " + value3);
   }
 
   /**
@@ -68,11 +69,25 @@ public class MapTest {
     Map<String, String> map = getMap();
 
     map.forEach((key, value) -> System.out.println(key + " --> " + value));
-
   }
 
   /**
    * compute
+   * 一下代码是compute方法的简单实现
+   *
+   * V oldValue = map.get(key);
+   * V newValue = remappingFunction.apply(key, oldValue);
+   * if (oldValue != null ) {
+   *    if (newValue != null)
+   *       map.put(key, newValue);
+   *    else
+   *       map.remove(key);
+   * } else {
+   *    if (newValue != null)
+   *       map.put(key, newValue);
+   *    else
+   *       return null;
+   * }
    */
   @Test
   public void testCompute() {
@@ -110,6 +125,13 @@ public class MapTest {
    * computeIfAbsent
    *  使用该方法可以非常方便地使用缓存模式
    *
+   * computeIfAbsent代码简单实现
+   *
+   * if (map.get(key) == null) {
+   *     V newValue = mappingFunction.apply(key);
+   *     if (newValue != null)
+   *         map.put(key, newValue);
+   * }
    *
    *  如果Map中没有指定Key的键值对
    *     mappingFunction会根据key构建一个键值对，如果该键值对中的value不为null，
@@ -149,6 +171,15 @@ public class MapTest {
 
   /**
    * computeIfPresent
+   *
+   * if (map.get(key) != null) {
+   *     V oldValue = map.get(key);
+   *     V newValue = remappingFunction.apply(key, oldValue);
+   *     if (newValue != null)
+   *         map.put(key, newValue);
+   *     else
+   *         map.remove(key);
+   * }
    */
   @Test
   public void textComputeIfPresent() {
@@ -184,6 +215,14 @@ public class MapTest {
 
   /**
    * merge
+   *
+   * V oldValue = map.get(key);
+   * V newValue = (oldValue == null) ? value :
+   *              remappingFunction.apply(oldValue, value);
+   * if (newValue == null)
+   *     map.remove(key);
+   * else
+   *     map.put(key, newValue);
    */
   @Test
   public void testMerge() {
@@ -199,11 +238,16 @@ public class MapTest {
     String res2 = map.merge("niu", "huang0", (t, u) -> t + " --> " + u);
     System.out.println("res2 = " + res2);
     map.forEach((k, v) -> System.out.println(k + " -> " + v));
-
   }
 
   /**
    * putIfAbsent
+   *
+   * V v = map.get(key);
+   * if (v == null)
+   *     v = map.put(key, value);
+   *
+   * return v;
    */
   @Test
   public void testPutIfAbsent() {
@@ -219,11 +263,17 @@ public class MapTest {
     map = getMap();
     map.putIfAbsent("niu", "huang0");
     map.forEach((k, v) -> System.out.println(k + " -> " + v));
-
   }
 
   /**
    * remove
+   *
+   * if (map.containsKey(key) && Objects.equals(map.get(key), value)) {
+   *     map.remove(key);
+   *     return true;
+   * } else
+   *     return false;
+   *
    */
   @Test
   public void testRemove() {
