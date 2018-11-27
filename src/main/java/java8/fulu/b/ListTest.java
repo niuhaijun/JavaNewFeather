@@ -13,12 +13,14 @@ import org.junit.Test;
  * Collection
  *    removeIf
  *
- *
  * @author niuhaijun
  * @date 2018/11/24 22:09
  */
 public class ListTest {
 
+  /**
+   * sort
+   */
   @Test
   public void testSort() {
 
@@ -31,6 +33,9 @@ public class ListTest {
     System.out.println(list);
   }
 
+  /**
+   * replaceAll
+   */
   @Test
   public void testReplaceAll() {
 
@@ -42,6 +47,9 @@ public class ListTest {
 
   }
 
+  /**
+   * removeIf
+   */
   @Test
   public void testRemoveIf() {
 
@@ -51,6 +59,9 @@ public class ListTest {
     System.out.println(list);
   }
 
+  /**
+   * forEach
+   */
   @Test
   public void testForEach() {
 
