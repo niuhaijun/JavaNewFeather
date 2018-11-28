@@ -27,6 +27,20 @@ public class ComparatorTest {
     System.out.println(list);
   }
 
+  /**
+   * reverseOrder
+   */
+  @Test
+  public void testReverseOrder() {
+
+    Comparator<Integer> comparator = Comparator.reverseOrder();
+
+    List<Integer> list = getList();
+    System.out.println(list);
+
+    list.sort(comparator);
+    System.out.println(list);
+  }
 
   /**
    * reversed
@@ -47,18 +61,45 @@ public class ComparatorTest {
     System.out.println(list);
   }
 
-
   /**
-   * reverseOrder
+   * comparing
+   * comparingInt
+   * comparingLong
+   * comparingDouble
    */
   @Test
-  public void testReverseOrder() {
+  public void testComparing() {
 
-    Comparator<Integer> comparator = Comparator.reverseOrder();
+    Comparator<String> comp = null;
+    List<String> list = null;
 
-    List<Integer> list = getList();
+    comp = Comparator.comparing(t -> t.length(), (o1, o2) -> o1 - o2);
+    list = getStringList();
+    System.out.println(list);
+    list.sort(comp);
     System.out.println(list);
 
+    System.out.println();
+
+    comp = Comparator.comparingInt(t -> t.length());
+    list = getStringList();
+    System.out.println(list);
+    list.sort(comp);
+    System.out.println(list);
+  }
+
+  /**
+   * thenComparing
+   * thenComparingInt
+   * thenComparingLong
+   * thenComparingDouble
+   */
+  @Test
+  public void testThenComparing() {
+
+    List<String> list = getStringList();
+    Comparator<String> comparator = Comparator.comparingInt(t -> t.length());
+    comparator = comparator.thenComparing(e -> Integer.valueOf(e));
     list.sort(comparator);
     System.out.println(list);
   }
@@ -72,6 +113,19 @@ public class ComparatorTest {
         add(2);
         add(1);
         add(3);
+      }
+    };
+  }
+
+  private List<String> getStringList() {
+
+    return new ArrayList<String>() {
+      {
+        add("1111");
+        add("222");
+        add("111");
+        add("11");
+        add("1");
       }
     };
   }
