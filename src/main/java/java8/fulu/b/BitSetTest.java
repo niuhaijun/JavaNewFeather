@@ -19,8 +19,10 @@ public class BitSetTest {
   @Test
   public void testStream() {
 
-    BitSet set = new BitSet();
+    BitSet set = new BitSet(100);
+
     IntStream stream = set.stream();
+    stream.forEach(System.out::println);
 
   }
 
