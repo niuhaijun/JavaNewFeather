@@ -109,7 +109,7 @@ public class MapTest {
     System.out.println();
 
     map = getMap();
-    String res2 = map.compute("ni", (t, u) -> t);
+    String res2 = map.compute("ni", (t, u) -> t + " --> " + u);
     System.out.println("res2 = " + res2);
     map.forEach((k, v) -> System.out.println(k + " --> " + v));
 
@@ -255,13 +255,15 @@ public class MapTest {
     Map<String, String> map = null;
 
     map = getMap();
-    map.putIfAbsent("niu0", "huang0");
+    String res0 = map.putIfAbsent("niu0", "huang0");
+    System.out.println("res0 == " + res0);
     map.forEach((k, v) -> System.out.println(k + " -> " + v));
 
     System.out.println();
 
     map = getMap();
-    map.putIfAbsent("niu", "huang0");
+    String res1 = map.putIfAbsent("niu", "huang0");
+    System.out.println("res1 == " + res1);
     map.forEach((k, v) -> System.out.println(k + " -> " + v));
   }
 
