@@ -32,6 +32,15 @@ BitSet
   stream
 
 Comparator
-  resvered
+  naturalOrder
+  reverseOrder
+  reversed
+  comparing
+  comparingInt
+  comparingLong
+  comparingDouble
   thenComparing
+  thenComparingInt
+  thenComparingLong
+  thenComparingDouble
 

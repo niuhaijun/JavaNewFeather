@@ -104,7 +104,6 @@ public class ComparatorTest {
     System.out.println(list);
   }
 
-
   private List<Integer> getList() {
 
     return new ArrayList<Integer>() {
