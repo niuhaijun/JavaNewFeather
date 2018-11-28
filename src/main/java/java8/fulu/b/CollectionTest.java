@@ -38,6 +38,7 @@ public class CollectionTest {
     Collection<Integer> list = getList();
 
     Stream<Integer> stream = list.stream();
+    stream.forEach(System.out::println);
   }
 
   /**
@@ -49,6 +50,7 @@ public class CollectionTest {
     Collection<Integer> list = getList();
 
     Stream<Integer> stream = list.parallelStream();
+    stream.filter(t -> t <= 2).forEach(System.out::println);
   }
 
   private List<Integer> getList() {
