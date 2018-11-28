@@ -12,6 +12,7 @@ import org.junit.Test;
 public class MathTest {
 
   /**
+   * 加法
    * addExact(int, int)
    * addExact(long, long)
    */
@@ -22,6 +23,7 @@ public class MathTest {
   }
 
   /**
+   * 减法
    * Math.subtractExact(int, int)
    * Math.subtractExact(long, long)
    */
@@ -32,6 +34,7 @@ public class MathTest {
   }
 
   /**
+   * 乘法
    * multiplyExact(int, int)
    * multiplyExact(long, long)
    */
@@ -42,6 +45,7 @@ public class MathTest {
   }
 
   /**
+   * 减1
    * decrementExact(int)
    * decrementExact(long)
    */
@@ -52,6 +56,7 @@ public class MathTest {
   }
 
   /**
+   * 加1
    * incrementExact(int)
    * incrementExact(long)
    */
@@ -62,6 +67,7 @@ public class MathTest {
   }
 
   /**
+   * 取反
    * negateExact
    */
   @Test
