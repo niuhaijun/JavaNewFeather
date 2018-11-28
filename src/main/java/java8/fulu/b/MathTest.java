@@ -76,4 +76,29 @@ public class MathTest {
     Math.negateExact(MIN_VALUE);
 
   }
+
+  /**
+   * 将long转为int
+   * toIntExact
+   */
+  @Test
+  public void testToIntExact() {
+
+    int res = Math.toIntExact(Long.MAX_VALUE);
+    System.out.println(res);
+  }
+
+  /**
+   * floorMod(int, int) floorMod(long, long)
+   * floorDiv(int, int) floorDiv(long, long)
+   * nextDown
+   */
+  @Test
+  public void test() {
+
+    System.out.println(Math.floorMod(4, 3));
+    System.out.println(Math.floorDiv(5, 3));
+    System.out.println(Math.nextDown(1.1));
+  }
+
 }
