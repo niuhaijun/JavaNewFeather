@@ -20,7 +20,6 @@ public class BitSetTest {
   public void testStream() {
 
     BitSet set = new BitSet(100);
-
     IntStream stream = set.stream();
     stream.forEach(System.out::println);
 
