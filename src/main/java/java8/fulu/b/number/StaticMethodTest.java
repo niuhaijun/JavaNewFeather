@@ -16,7 +16,7 @@ import org.junit.Test;
  * @author niuhaijun
  * @date 2018/11/29 11:11
  */
-public class IntegerTest {
+public class StaticMethodTest {
 
   /**
    * max
