@@ -1,4 +1,4 @@
-package java8.fulu.b;
+package java8.fulu.b.util;
 
 import java.util.ArrayList;
 import java.util.Collection;

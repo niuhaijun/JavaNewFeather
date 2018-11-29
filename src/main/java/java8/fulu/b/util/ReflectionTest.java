@@ -1,4 +1,4 @@
-package java8.fulu.b;
+package java8.fulu.b.util;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
