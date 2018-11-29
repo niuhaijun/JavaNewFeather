@@ -61,10 +61,9 @@ public class ArraysTest {
     Integer[] data = getArray();
     System.out.println(Arrays.toString(data));
 
-    Arrays.parallelPrefix(data, (a, b) -> a + b);
+    Arrays.parallelPrefix(data, (a, b) -> a * b);
     System.out.println(Arrays.toString(data));
   }
-
 
   private Integer[] getArray() {
 
