@@ -104,6 +104,36 @@ public class ComparatorTest {
     System.out.println(list);
   }
 
+  /**
+   * nullsFirst
+   */
+  @Test
+  public void testNullsFirst() {
+
+    Comparator<String> comp = null;
+    List<String> list = null;
+
+    list = getContainsEmptyList();
+    comp = Comparator.nullsFirst(Comparator.comparingInt(t -> t.length()));
+    list.sort(comp);
+    System.out.println(list);
+  }
+
+  /**
+   * nullsLast
+   */
+  @Test
+  public void testNullsLast() {
+
+    Comparator<String> comp = null;
+    List<String> list = null;
+
+    list = getContainsEmptyList();
+    comp = Comparator.nullsLast(Comparator.comparingInt(t -> t.length()));
+    list.sort(comp);
+    System.out.println(list);
+  }
+
   private List<Integer> getList() {
 
     return new ArrayList<Integer>() {
@@ -125,6 +155,18 @@ public class ComparatorTest {
         add("111");
         add("11");
         add("1");
+      }
+    };
+  }
+
+  private List<String> getContainsEmptyList() {
+
+    return new ArrayList<String>() {
+      {
+        add("1");
+        add("11");
+        add("111");
+        add(null);
       }
     };
   }
