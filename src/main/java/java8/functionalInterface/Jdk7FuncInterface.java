@@ -38,7 +38,7 @@ public class Jdk7FuncInterface {
   }
 
   /**
-   * java.util.concurrent.Callable
+   * java.collection.concurrent.Callable
    */
   @Test
   public void callableTest() throws ExecutionException, InterruptedException {
@@ -62,7 +62,7 @@ public class Jdk7FuncInterface {
   }
 
   /**
-   * java.util.Comparator
+   * java.collection.Comparator
    */
   @Test
   public void comparatorTest() {

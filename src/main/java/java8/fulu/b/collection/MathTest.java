@@ -1,4 +1,4 @@
-package java8.fulu.b.util;
+package java8.fulu.b.collection;
 
 import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.MIN_VALUE;

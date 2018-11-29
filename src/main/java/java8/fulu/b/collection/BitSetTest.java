@@ -1,4 +1,4 @@
-package java8.fulu.b.util;
+package java8.fulu.b.collection;
 
 import java.util.BitSet;
 import java.util.stream.IntStream;

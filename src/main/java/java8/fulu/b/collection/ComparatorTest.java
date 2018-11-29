@@ -1,4 +1,4 @@
-package java8.fulu.b.util;
+package java8.fulu.b.collection;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -73,7 +73,8 @@ public class ComparatorTest {
     Comparator<String> comp = null;
     List<String> list = null;
 
-    comp = Comparator.comparing(t -> t.length(), (o1, o2) -> o1 - o2);
+//    comp = Comparator.comparing(t -> t.length(), (o1, o2) -> o1 - o2);
+    comp = Comparator.comparingInt(t -> t.length());
     list = getStringList();
     System.out.println(list);
     list.sort(comp);

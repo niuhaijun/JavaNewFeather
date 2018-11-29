@@ -169,7 +169,7 @@ public class Jdk8FuncInterface {
 
 
   /**
-   * java.util.Function
+   * java.collection.Function
    */
   @Test
   public void functionTest() {
