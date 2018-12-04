@@ -5,8 +5,9 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -16,6 +17,7 @@ import java.util.concurrent.TimeoutException;
 public class AsyncDemo {
 
   Random random = new Random();
+  ExecutorService executor = Executors.newCachedThreadPool();
 
   public static void main(String[] args) {
 
@@ -34,6 +36,9 @@ public class AsyncDemo {
        */
 //      double price = futurePrice.get();
 
+      /**
+       * 在规定的时间内，阻塞等待结果
+       */
       double price = futurePrice.get(100L, MILLISECONDS);
 
     } catch (InterruptedException e) {
@@ -91,7 +96,7 @@ public class AsyncDemo {
       try {
         double price = calculatePrice(product);
 
-        if (price > 100) {
+        if (price > 65) {
           throw new Exception("价格大于20");
         }
 
@@ -100,6 +105,9 @@ public class AsyncDemo {
          */
         future.complete(price);
       } catch (Exception e) {
+        /**
+         * 将导致CompletableFuture内发生问题的异常抛出
+         */
         future.completeExceptionally(e);
       }
 
@@ -113,14 +121,17 @@ public class AsyncDemo {
   }
 
   /**
-   * 异步方法（工厂方法）
+   * 异步方法（工厂方法CompletableFuture.supplyAsync()创建CompletableFuture）
    *    根据产品名称获取产品价格
    *
    * @param product 产品名称
    * @return 返回产品价格
    */
   public Future<Double> getPriceAsyncByJDK(String product) {
-    return CompletableFuture.supplyAsync(() -> calculatePrice(product));
+
+//    return CompletableFuture.supplyAsync(() -> calculatePrice(product));
+
+    return CompletableFuture.supplyAsync(() -> calculatePrice(product), executor);
   }
 
 
