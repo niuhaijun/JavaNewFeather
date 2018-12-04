@@ -33,5 +33,7 @@ public class App {
     }
     System.out.println(message);
 
+    System.out.println(0 % 10);
+
   }
 }
