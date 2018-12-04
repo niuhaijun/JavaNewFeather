@@ -21,6 +21,10 @@ public class FutureTest {
 
     ExecutorService executor = Executors.newCachedThreadPool();
 
+    /**
+     * 使用Callable封装耗时的操作，
+     * 并将它提交到ExecutorService。
+     */
     Future<String> future = executor.submit(new Callable<String>() {
       @Override
       public String call() throws Exception {
@@ -40,6 +44,9 @@ public class FutureTest {
     }
 
     try {
+      /**
+       * 当需要获取异步操作的结果时，调用Future的get方法
+       */
       String time = future.get(3, SECONDS);
       System.out.println(time);
     } catch (InterruptedException e) {
@@ -52,6 +59,5 @@ public class FutureTest {
 
     System.out.println(LocalDateTime.now());
   }
-
 
 }

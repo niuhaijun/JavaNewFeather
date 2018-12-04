@@ -1,9 +1,13 @@
 package java8.future;
 
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * @author niuhaijun
@@ -25,10 +29,18 @@ public class AsyncDemo {
     delay();
 
     try {
-      double price = futurePrice.get();
+      /**
+       * 不推荐使用
+       */
+//      double price = futurePrice.get();
+
+      double price = futurePrice.get(100L, MILLISECONDS);
+
     } catch (InterruptedException e) {
       e.printStackTrace();
     } catch (ExecutionException e) {
+      e.printStackTrace();
+    } catch (TimeoutException e) {
       e.printStackTrace();
     }
 
@@ -45,21 +57,55 @@ public class AsyncDemo {
     }
   }
 
+  /**
+   * 同步方法
+   *
+   * @param product 产品
+   * @return 返回产品价格
+   */
   public double getPrice(String product) {
 
     return calculatePrice(product);
   }
 
+  /**
+   * 异步方法（自定义）
+   *
+   * @param product 产品
+   * @return 返回产品价格
+   */
   public Future<Double> getPriceAsync(String product) {
 
     CompletableFuture<Double> future = new CompletableFuture<>();
     new Thread(() -> {
-      double price = calculatePrice(product);
-      future.complete(price);
+
+      try {
+        double price = calculatePrice(product);
+
+        if (price > 100) {
+          throw new Exception("价格大于20");
+        }
+
+        future.complete(price);
+      } catch (Exception e) {
+        future.completeExceptionally(e);
+      }
+
     }).start();
 
     return future;
   }
+
+  /**
+   * 异步方法（工厂方法）
+   *
+   * @param product 产品
+   * @return 返回产品价格
+   */
+  public Future<Double> getPriceAsyncByJDK(String product) {
+    return CompletableFuture.supplyAsync(() -> calculatePrice(product));
+  }
+
 
   private double calculatePrice(String product) {
 
