@@ -48,10 +48,13 @@ public class AsyncDemo {
     System.out.println(retrievalTime);
   }
 
+  /**
+   * 模拟1s的延迟
+   */
   public static void delay() {
 
     try {
-      Thread.sleep(100);
+      Thread.sleep(1_000L);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -59,8 +62,9 @@ public class AsyncDemo {
 
   /**
    * 同步方法
+   *    根据产品名称获取产品价格
    *
-   * @param product 产品
+   * @param product 产品名称
    * @return 返回产品价格
    */
   public double getPrice(String product) {
@@ -70,12 +74,17 @@ public class AsyncDemo {
 
   /**
    * 异步方法（自定义）
+   *    根据产品名称获取产品价格
    *
-   * @param product 产品
+   * @param product 产品名称
    * @return 返回产品价格
    */
   public Future<Double> getPriceAsync(String product) {
 
+    /**
+     * 创建CompletableFuture对象
+     * 该对象会包含异步操作的结果
+     */
     CompletableFuture<Double> future = new CompletableFuture<>();
     new Thread(() -> {
 
@@ -86,6 +95,9 @@ public class AsyncDemo {
           throw new Exception("价格大于20");
         }
 
+        /**
+         * 设置future的返回值
+         */
         future.complete(price);
       } catch (Exception e) {
         future.completeExceptionally(e);
@@ -93,13 +105,18 @@ public class AsyncDemo {
 
     }).start();
 
+    /**
+     * 无需等待还没结束的计算，
+     * 直接返回future对象
+     */
     return future;
   }
 
   /**
    * 异步方法（工厂方法）
+   *    根据产品名称获取产品价格
    *
-   * @param product 产品
+   * @param product 产品名称
    * @return 返回产品价格
    */
   public Future<Double> getPriceAsyncByJDK(String product) {
