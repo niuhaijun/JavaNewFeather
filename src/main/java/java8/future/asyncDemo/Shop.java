@@ -1,10 +1,11 @@
-package java8.future;
+package java8.future.asyncDemo;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java8.future.asyncDemo.Discount.Code;
 
 /**
  * @author niuhaijun
@@ -31,9 +32,28 @@ public class Shop {
     this.name = name;
   }
 
+  /**
+   * 获取商品在该商铺的价格
+   *
+   * @param product 商品名称
+   * @return 商品价格
+   */
   public double getPrice(String product) {
 
     return calculatePrice(product);
+  }
+
+  /**
+   * 获取商品在该商铺详细的价格信息
+   *
+   * @param product 商品名称
+   * @return 商品详细的价格信息
+   */
+  public String getDetailPrice(String product) {
+
+    double price = calculatePrice(product);
+    Discount.Code code = Discount.Code.values()[random.nextInt(Code.values().length)];
+    return String.format("%s:%.2f:%s", name, price, code);
   }
 
   public Future<Double> getPriceAsync(String product) {
