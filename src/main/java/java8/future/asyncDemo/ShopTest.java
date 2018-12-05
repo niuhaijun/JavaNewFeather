@@ -8,6 +8,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+import java.util.stream.Stream;
 import org.junit.Test;
 
 /**
@@ -201,6 +202,9 @@ public class ShopTest {
         /**
          * 异步
          * 使用另一个异步任务构造期望的Future,申请折扣
+         *
+         * 传入thenCompose()方法的对象类型为Function
+         * 构建Function的入参为CompletableFuture执行完毕的结果
          */
         .map(future -> future.thenCompose(
             quote -> CompletableFuture.supplyAsync(() -> Discount.applyDiscount(quote), executor)))
@@ -258,11 +262,48 @@ public class ShopTest {
   @Test
   public void testThenApply() {
 
+    CompletableFuture<Double> money = CompletableFuture.supplyAsync(() -> 123.45);
+    /**
+     * 被传入thenApply()方法的参数类型为Function
+     * 构建Function的入参为CompletableFuture执行完毕后的结果
+     */
+    CompletableFuture<String> endMoney = money.thenApply(t -> "123--->" + t);
+    System.out.println(endMoney.join());
   }
 
+  /**
+   * 响应CompletableFuture的completion事件
+   */
   @Test
   public void testThenAccept() {
 
+    List<Shop> shops = getShopList();
+    String product = "you are the best";
+    Executor executor = getExecutor(shops);
+
+    Stream<CompletableFuture<String>> stream = shops.stream()
+        .map(shop -> CompletableFuture.supplyAsync(() -> shop.getDetailPrice(product), executor))
+        .map(future -> future.thenApply(Quote::parse))
+        .map(future -> future.thenCompose(
+            quote -> CompletableFuture.supplyAsync(() -> Discount.applyDiscount(quote), executor)));
+
+    Stream<CompletableFuture<Void>> middleStream = stream
+        .map(future -> future.thenAccept(System.out::println));
+
+    CompletableFuture[] futures = middleStream.toArray(size -> new CompletableFuture[size]);
+
+    /**
+     * allOf
+     * 数组中所有的CompletableFuture对象执行完毕以后，它会返回一个CompletableFuture<Void>对象
+     */
+    CompletableFuture.allOf(futures).join();
+    /**
+     * anyOf
+     * 返回数组中
+     *  第一个执行完毕的CompletableFuture对象的返回值
+     *     构成的CompletableFuture<Object>
+     */
+//    CompletableFuture.anyOf(futures).join();
   }
   //B ---------------------------------------------//
 
@@ -271,8 +312,6 @@ public class ShopTest {
     return Arrays
         .asList(
             new Shop("11"), new Shop("22"), new Shop("33"), new Shop("44"), new Shop("55"),
-            new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"),
-            new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"),
             new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"));
   }
 

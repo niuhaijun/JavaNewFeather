@@ -14,7 +14,8 @@ import java8.future.asyncDemo.Discount.Code;
 public class Shop {
 
   private String name;
-  private Random random = new Random();
+  private static Random random = new Random();
+
   private static ExecutorService executorService = Executors.newCachedThreadPool();
 
   public String getName() {
@@ -65,6 +66,7 @@ public class Shop {
   private double calculatePrice(String product) {
 
     delay();
+    randomDelay();
     return random.nextDouble() * product.charAt(0) + product.charAt(1);
   }
 
@@ -74,6 +76,16 @@ public class Shop {
       Thread.sleep(1000L);
     } catch (InterruptedException e) {
       e.printStackTrace();
+    }
+  }
+
+  public static void randomDelay() {
+
+    int delay = 500 + random.nextInt(2000);
+    try {
+      Thread.sleep(delay);
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
     }
   }
 }
