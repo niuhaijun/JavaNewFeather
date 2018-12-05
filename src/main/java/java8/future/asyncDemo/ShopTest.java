@@ -135,8 +135,7 @@ public class ShopTest {
     System.out.println("Done in " + duration + " msecs!");
   }
 
-  //---------------------------------------------//
-
+  //A ---------------------------------------------//
 
   /**
    * 先获取商品在每个店铺的价格
@@ -219,6 +218,9 @@ public class ShopTest {
     System.out.println("顺序流 异步");
     System.out.println("Done in " + duration + " msecs!");
   }
+  //A ---------------------------------------------//
+
+  //B ---------------------------------------------//
 
   /**
    * 使用CompletableFuture的thenCompose方法
@@ -244,13 +246,25 @@ public class ShopTest {
    * 并且第二个任务不必等待第一个任务结束才开始
    */
   @Test
-  public void testCombine() {
+  public void testThenCombine() {
 
     CompletableFuture<Double> money = CompletableFuture.supplyAsync(() -> 123.45);
     CompletableFuture<Double> percentage = CompletableFuture.supplyAsync(() -> 0.1);
     CompletableFuture<Double> end = money.thenCombine(percentage, (pri, per) -> pri * per);
     System.out.println(end.join());
   }
+
+
+  @Test
+  public void testThenApply() {
+
+  }
+
+  @Test
+  public void testThenAccept() {
+
+  }
+  //B ---------------------------------------------//
 
   private List<Shop> getShopList() {
 
