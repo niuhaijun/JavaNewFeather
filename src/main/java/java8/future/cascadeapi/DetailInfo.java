@@ -131,7 +131,6 @@ public class DetailInfo {
 
     Stream<ObjEnd> stream = list.parallelStream()
         .peek(objEnd -> {
-          System.out.println("------------" + Thread.currentThread().getId());
           CompletableFuture<ObjOne> future = supplyAsync(
               () -> ServerOne.get(objEnd.getId()), executor);
           ObjOne objOne = future.join();
