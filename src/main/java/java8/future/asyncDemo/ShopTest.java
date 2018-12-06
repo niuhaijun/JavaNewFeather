@@ -233,16 +233,32 @@ public class ShopTest {
   @Test
   public void testThenCompose() {
 
-    CompletableFuture<String> cf1 = new CompletableFuture();
-    cf1.complete("123");
-    CompletableFuture<Integer> cf2 = cf1.thenCompose(t -> {
-      CompletableFuture<Integer> cf = new CompletableFuture<>();
-      cf.complete(Integer.valueOf(t));
-      System.out.println("1----" + cf);
-      return cf;
+//    CompletableFuture<String> cf1 = new CompletableFuture();
+//    cf1.complete("123");
+//    CompletableFuture<Integer> cf2 = cf1.thenCompose(t -> {
+//      CompletableFuture<Integer> cf = new CompletableFuture<>();
+//      cf.complete(Integer.valueOf(t));
+//      System.out.println("1----" + cf);
+//      return cf;
+//    });
+//    System.out.println("2----" + cf2);
+//    System.out.println(cf2.join());
+
+    CompletableFuture<String> cf1 = CompletableFuture.supplyAsync(() -> {
+      Shop.randomDelay();
+      return "123";
     });
+
+    System.out.println("1----" + cf1);
+
+    CompletableFuture<Integer> cf2 = cf1.thenCompose(t -> CompletableFuture.supplyAsync(() -> {
+      Shop.randomDelay();
+      return Integer.valueOf(t);
+    }));
+
     System.out.println("2----" + cf2);
     System.out.println(cf2.join());
+
   }
 
   /**
