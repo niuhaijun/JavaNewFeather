@@ -1,0 +1,21 @@
+有三个远程服务
+
+server1提供的服务
+  id -> id
+        teacherId
+
+server2提供的服务
+  teacherId ->  teacherId
+                teacherName
+                pictureId
+
+server3提供的服务
+  pictureId ->  pictureId
+                pictureUrl
+
+整合后的数据
+  id -> id
+        teacherId
+        teacherName
+        pictureId
+        pictureUrl
