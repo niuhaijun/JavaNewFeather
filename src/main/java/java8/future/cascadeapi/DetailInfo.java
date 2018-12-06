@@ -9,7 +9,9 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.stream.Stream;
 import java8.future.cascadeapi.obj.ObjEnd;
+import java8.future.cascadeapi.obj.ObjOne;
 import java8.future.cascadeapi.obj.ObjThree;
+import java8.future.cascadeapi.obj.ObjTwo;
 import java8.future.cascadeapi.server.ServerOne;
 import java8.future.cascadeapi.server.ServerThree;
 import java8.future.cascadeapi.server.ServerTwo;
@@ -84,6 +86,87 @@ public class DetailInfo {
     parallel_parallelStream(executor);
     System.out
         .println("parallel_parallelStream()花费的时间为\n  " + (System.nanoTime() - start) / 1000_000L);
+  }
+
+  /**
+   * 顺序流合并信息
+   *
+   * 顺序流值使用一个线程，并且是当前线程
+   */
+  private void sequentialStreamMergeInfo() {
+
+    List<ObjEnd> list = getList();
+    Stream<ObjEnd> stream = list.stream()
+        .peek(objEnd -> {
+          CompletableFuture<ObjOne> future = supplyAsync(() -> ServerOne.get(objEnd.getId()));
+          ObjOne objOne = future.join();
+          objEnd.setTeacherId(objOne.getTeacherId());
+        })
+        .peek(objEnd -> {
+          CompletableFuture<ObjTwo> future = supplyAsync(
+              () -> ServerTwo.get(objEnd.getTeacherId()));
+          ObjTwo objTwo = future.join();
+          objEnd.setTeacherName(objTwo.getTeacherName());
+          objEnd.setPictureId(objTwo.getPictureId());
+        })
+        .peek(objEnd -> {
+          CompletableFuture<ObjThree> future = supplyAsync(
+              () -> ServerThree.get(objEnd.getPictureId()));
+          ObjThree objThree = future.join();
+          objEnd.setPictureUrl(objThree.getPictureUrl());
+        });
+
+    stream.forEach(objEnd -> System.out.println(objEnd.toString()));
+  }
+
+  /**
+   * 并行流合并信息
+   *
+   * 并行流就是一个内容分成多个数据块，并用不同的线程分别每个数据块的流
+   */
+  private void parallelStreamMergeInfo() {
+
+    List<ObjEnd> list = getList();
+    Executor executor = getExecutor(list);
+
+    Stream<ObjEnd> stream = list.parallelStream()
+        .peek(objEnd -> {
+          System.out.println("------------" + Thread.currentThread().getId());
+          CompletableFuture<ObjOne> future = supplyAsync(
+              () -> ServerOne.get(objEnd.getId()), executor);
+          ObjOne objOne = future.join();
+          objEnd.setTeacherId(objOne.getTeacherId());
+        })
+        .peek(objEnd -> {
+          CompletableFuture<ObjTwo> future = supplyAsync(
+              () -> ServerTwo.get(objEnd.getTeacherId()), executor);
+          ObjTwo objTwo = future.join();
+          objEnd.setTeacherName(objTwo.getTeacherName());
+          objEnd.setPictureId(objTwo.getPictureId());
+        })
+        .peek(objEnd -> {
+          CompletableFuture<ObjThree> future = supplyAsync(
+              () -> ServerThree.get(objEnd.getPictureId()), executor);
+          ObjThree objThree = future.join();
+          objEnd.setPictureUrl(objThree.getPictureUrl());
+        });
+
+    stream.forEach(objEnd -> System.out.println(objEnd.toString()));
+  }
+
+  @Test
+  public void computeMergeTime() {
+
+    long start = System.nanoTime();
+    sequentialStreamMergeInfo();
+    System.out.println(
+        "sequentialStreamMergeInfo()花费的时间为\n  "
+            + (System.nanoTime() - start) / 1_000_000L);
+
+    start = System.nanoTime();
+    parallelStreamMergeInfo();
+    System.out.println("parallelStreamMergeInfo()花费的时间\n  "
+        + (System.nanoTime() - start) / 1_000_000L);
   }
 
   public List<ObjEnd> getList() {

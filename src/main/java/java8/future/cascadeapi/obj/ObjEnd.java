@@ -75,4 +75,16 @@ public class ObjEnd {
 
     this.pictureUrl = pictureUrl;
   }
+
+  @Override
+  public String toString() {
+
+    return "ObjEnd{" +
+        "id='" + id + '\'' +
+        ", teacherId='" + teacherId + '\'' +
+        ", teacherName='" + teacherName + '\'' +
+        ", pictureId='" + pictureId + '\'' +
+        ", pictureUrl='" + pictureUrl + '\'' +
+        '}';
+  }
 }
