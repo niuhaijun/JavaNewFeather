@@ -1,5 +1,6 @@
 package java8.future.asyncDemo;
 
+import static java.util.concurrent.CompletableFuture.supplyAsync;
 import static java.util.stream.Collectors.toList;
 
 import java.util.Arrays;
@@ -62,11 +63,9 @@ public class ShopTest {
 
     long start = System.nanoTime();
 
-    List<CompletableFuture<String>> priceFuture = getShopList().stream().map(
-        shop -> {
-          return CompletableFuture
-              .supplyAsync(() -> shop.getName() + " price is " + shop.getPrice(product));
-        }).collect(toList());
+    List<CompletableFuture<String>> priceFuture = getShopList().stream()
+        .map(shop -> supplyAsync(() -> shop.getName() + " price is " + shop.getPrice(product)))
+        .collect(toList());
 
     List<String> price = priceFuture.stream().map(CompletableFuture::join).collect(toList());
 
@@ -86,11 +85,9 @@ public class ShopTest {
 
     long start = System.nanoTime();
 
-    List<CompletableFuture<String>> priceFuture = getShopList().parallelStream().map(
-        shop -> {
-          return CompletableFuture
-              .supplyAsync(() -> shop.getName() + " price is " + shop.getPrice(product));
-        }).collect(toList());
+    List<CompletableFuture<String>> priceFuture = getShopList().parallelStream()
+        .map(shop -> supplyAsync(() -> shop.getName() + " price is " + shop.getPrice(product)))
+        .collect(toList());
 
     List<String> price = priceFuture.parallelStream().map(CompletableFuture::join)
         .collect(toList());
@@ -114,11 +111,11 @@ public class ShopTest {
 
     long start = System.nanoTime();
 
-    List<CompletableFuture<String>> priceFuture = getShopList().stream().map(
-        shop -> {
-          return CompletableFuture
-              .supplyAsync(() -> shop.getName() + " price is " + shop.getPrice(product), executor);
-        }).collect(toList());
+    List<CompletableFuture<String>> priceFuture = getShopList().stream()
+        .map(shop -> supplyAsync(() -> shop.getName() + " price is " + shop.getPrice(product),
+            executor))
+        .collect(toList());
+
     List<String> price = priceFuture.stream().map(CompletableFuture::join).collect(toList());
 
     /**
@@ -194,7 +191,7 @@ public class ShopTest {
          * 异步
          * 以异步的方式取得product在每个Shop中的 原始价格，折扣码
          */
-        .map(shop -> CompletableFuture.supplyAsync(() -> shop.getDetailPrice(product), executor))
+        .map(shop -> supplyAsync(() -> shop.getDetailPrice(product), executor))
         /**
          * Quote存在时，对其返回的值进行转换
          */
@@ -207,7 +204,7 @@ public class ShopTest {
          * 构建Function的入参为CompletableFuture执行完毕的结果
          */
         .map(future -> future.thenCompose(
-            quote -> CompletableFuture.supplyAsync(() -> Discount.applyDiscount(quote), executor)))
+            quote -> supplyAsync(() -> Discount.applyDiscount(quote), executor)))
         .collect(toList());
 
     List<String> res = list.stream()
@@ -244,14 +241,14 @@ public class ShopTest {
 //    System.out.println("2----" + cf2);
 //    System.out.println(cf2.join());
 
-    CompletableFuture<String> cf1 = CompletableFuture.supplyAsync(() -> {
+    CompletableFuture<String> cf1 = supplyAsync(() -> {
       Shop.randomDelay();
       return "123";
     });
 
     System.out.println("1----" + cf1);
 
-    CompletableFuture<Integer> cf2 = cf1.thenCompose(t -> CompletableFuture.supplyAsync(() -> {
+    CompletableFuture<Integer> cf2 = cf1.thenCompose(t -> supplyAsync(() -> {
       Shop.randomDelay();
       return Integer.valueOf(t);
     }));
@@ -268,8 +265,8 @@ public class ShopTest {
   @Test
   public void testThenCombine() {
 
-    CompletableFuture<Double> money = CompletableFuture.supplyAsync(() -> 123.45);
-    CompletableFuture<Double> percentage = CompletableFuture.supplyAsync(() -> 0.1);
+    CompletableFuture<Double> money = supplyAsync(() -> 123.45);
+    CompletableFuture<Double> percentage = supplyAsync(() -> 0.1);
     CompletableFuture<Double> end = money.thenCombine(percentage, (pri, per) -> pri * per);
     System.out.println(end.join());
   }
@@ -278,7 +275,7 @@ public class ShopTest {
   @Test
   public void testThenApply() {
 
-    CompletableFuture<Double> money = CompletableFuture.supplyAsync(() -> 123.45);
+    CompletableFuture<Double> money = supplyAsync(() -> 123.45);
     /**
      * 被传入thenApply()方法的参数类型为Function
      * 构建Function的入参为CompletableFuture执行完毕后的结果
@@ -298,10 +295,10 @@ public class ShopTest {
     Executor executor = getExecutor(shops);
 
     Stream<CompletableFuture<String>> stream = shops.stream()
-        .map(shop -> CompletableFuture.supplyAsync(() -> shop.getDetailPrice(product), executor))
+        .map(shop -> supplyAsync(() -> shop.getDetailPrice(product), executor))
         .map(future -> future.thenApply(Quote::parse))
         .map(future -> future.thenCompose(
-            quote -> CompletableFuture.supplyAsync(() -> Discount.applyDiscount(quote), executor)));
+            quote -> supplyAsync(() -> Discount.applyDiscount(quote), executor)));
 
     Stream<CompletableFuture<Void>> middleStream = stream
         .map(future -> future.thenAccept(System.out::println));
@@ -325,30 +322,42 @@ public class ShopTest {
 
   private List<Shop> getShopList() {
 
-    return Arrays
-        .asList(
-            new Shop("11"), new Shop("22"), new Shop("33"), new Shop("44"), new Shop("55"),
-            new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"));
+    return Arrays.asList(
+        new Shop("01"), new Shop("02"), new Shop("03"), new Shop("04"), new Shop("05"),
+        new Shop("06"), new Shop("07"), new Shop("08"), new Shop("09"), new Shop("10"),
+        new Shop("11"), new Shop("22"), new Shop("33"), new Shop("44"), new Shop("55"),
+        new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"),
+        new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"),
+        new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"),
+        new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"),
+        new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"),
+        new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"),
+        new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"),
+        new Shop("01"), new Shop("02"), new Shop("03"), new Shop("04"), new Shop("05"),
+        new Shop("06"), new Shop("07"), new Shop("08"), new Shop("09"), new Shop("10"),
+        new Shop("11"), new Shop("22"), new Shop("33"), new Shop("44"), new Shop("55"),
+        new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"),
+        new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"),
+        new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"),
+        new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"),
+        new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"),
+        new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"),
+        new Shop("66"), new Shop("77"), new Shop("88"), new Shop("99"), new Shop("00"));
   }
 
   private Executor getExecutor(List<Shop> shops) {
 
-    final Executor executor = Executors.newFixedThreadPool(Math.min(shops.size(), 50),
-        new ThreadFactory() {
-          @Override
-          public Thread newThread(Runnable r) {
+    ThreadFactory factory = (Runnable r) -> {
+      Thread t = new Thread(r);
+      /**
+       * 使用守护线程
+       * 这种方式不会阻止程序的关停
+       */
+      t.setDaemon(true);
+      return t;
+    };
 
-            Thread t = new Thread(r);
-            /**
-             * 使用守护线程
-             * 这种方式不会阻止程序的关停
-             */
-            t.setDaemon(true);
-            return t;
-          }
-        });
-
-    return executor;
+    return Executors.newFixedThreadPool(Math.min(shops.size(), 50), factory);
   }
 
 }
