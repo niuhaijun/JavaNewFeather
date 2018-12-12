@@ -1,4 +1,4 @@
-package javacoretechnology36course.teach06;
+package javacoretechnology36course.teach05;
 
 import org.junit.Test;
 

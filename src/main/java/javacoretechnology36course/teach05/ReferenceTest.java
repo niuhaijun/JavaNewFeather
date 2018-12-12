@@ -1,9 +1,8 @@
-package javacoretechnology36course;
+package javacoretechnology36course.teach05;
 
 import java.lang.ref.PhantomReference;
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
-import java.lang.ref.SoftReference;
 
 /**
  * @author niuhaijun
