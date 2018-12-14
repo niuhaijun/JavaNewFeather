@@ -1,5 +1,7 @@
 package niu;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.junit.Test;
 
 /**
@@ -35,5 +37,12 @@ public class App {
 
     System.out.println(0 % 10);
 
+  }
+
+  @Test
+  public void test() {
+    String html = "<p>xxx</p>";
+    Document doc = Jsoup.parse(html);
+    System.out.println(doc.body());
   }
 }
