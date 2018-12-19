@@ -39,10 +39,27 @@ public class App {
 
   }
 
+  /**
+   * 去除HTML标签
+   */
   @Test
   public void test() {
     String html = "<p>xxx</p>";
     Document doc = Jsoup.parse(html);
     System.out.println(doc.body());
+  }
+
+  @Test
+  public void test1() {
+    String str =  "<p><span style=\"text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; display: inline !important; font: 14px/24px 'Lucida Grande', 'Lucida Sans Unicode', sans-serif; white-space: normal; float: none; letter-spacing: normal; color: rgb(0,0,0); word-spacing: 0px; -webkit-text-stroke-width: 0px\">学而思初中生物学科负责人，两年毕业年级教学经验。</span></p>";
+
+    StringBuilder builder = new StringBuilder();
+    String left = "<";
+    String right = ">";
+
+    String regex = "[<][*][`>]";
+    System.out.println(str.replaceAll(regex,""));
+
+
   }
 }
