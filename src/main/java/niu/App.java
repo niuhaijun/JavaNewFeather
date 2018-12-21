@@ -45,19 +45,34 @@ public class App {
   @Test
   public void test() {
 
-    String html = "<p>xxx</p>";
+    String html = "<p>&nbsp;张笑老师毕业于华中农业大学，现为学而思小学数学优秀老师，从小数学功底深厚。"
+        + "对待孩子十分耐心，极具亲和力，得到广大学生和家长的喜爱。授课深入浅出，生动有趣，吸引孩子主动学习，"
+        + "注重学习方法和学习习惯的培养，让孩子真正融入学习。</p>\r\n<div>&nbsp;</div>";
     Document doc = Jsoup.parse(html);
-    System.out.println(doc.body());
+//    System.out.println(doc.body());
+    System.out.println(doc.text());
   }
 
   @Test
   public void test1() {
 
-    String str = "<p><span style=\"text-transform: none; background-color: rgb(255,255,255); text-indent: 0px; display: inline !important; font: 14px/24px 'Lucida Grande', 'Lucida Sans Unicode', sans-serif; white-space: normal; float: none; letter-spacing: normal; color: rgb(0,0,0); word-spacing: 0px; -webkit-text-stroke-width: 0px\">学而思初中生物学科负责人，\r\n两年毕业年级教学经验。</span></p>";
+    String str = "<p>&nbsp;张笑老师毕业于华中农业大学，现为学而思小学数学优秀老师，从小数学功底深厚。"
+        + "对待孩子十分耐心，极具亲和力，得到广大学生和家长的喜爱。授课深入浅出，生动有趣，吸引孩子主动学习，"
+        + "注重学习方法和学习习惯的培养，让孩子真正融入学习。</p>\r\n<div>&nbsp;</div>";
     String regexHtml = "[<][^<]+[>]";
     String regEx_space = "\\s*|\t|\r|\n";
     System.out.println(str.replaceAll(regexHtml, "").replaceAll(regEx_space, ""));
 
 
+  }
+
+  @Test
+  public void test2() {
+
+    Byte b = Byte.valueOf("12");
+    Short s = Short.valueOf("123");
+    Integer i = Integer.valueOf("123");
+    Long l = Long.valueOf(123);
+    Character c = Character.valueOf((char) 0);
   }
 }
