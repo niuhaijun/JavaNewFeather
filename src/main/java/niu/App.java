@@ -1,5 +1,9 @@
 package niu;
 
+import static java.util.stream.Collectors.toMap;
+
+import java.util.Map;
+import java.util.stream.Stream;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
@@ -74,5 +78,13 @@ public class App {
     Integer i = Integer.valueOf("123");
     Long l = Long.valueOf(123);
     Character c = Character.valueOf((char) 0);
+  }
+
+  @Test
+  public void test3() {
+
+    Stream<Integer> stream = Stream.of(1, 2, 3, 1);
+    Map<Integer, Integer> map = stream.collect(toMap(key -> key, value -> value, (oldValue, newValue) -> oldValue + newValue));
+    System.out.println(map.get(1));
   }
 }
