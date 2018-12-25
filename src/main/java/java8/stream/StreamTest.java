@@ -477,4 +477,12 @@ public class StreamTest {
     });
 
   }
+
+  /**
+   * 下游收集器
+   */
+  @Test
+  public void test14() {
+    integers.stream().collect(Collectors.maxBy(Comparator.comparing(i -> i)));
+  }
 }
