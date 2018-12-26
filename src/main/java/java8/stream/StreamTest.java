@@ -409,6 +409,7 @@ public class StreamTest {
    */
   @Test
   public void stringToStream() {
+
     String str = "我爱你";
     Stream<Character> stream = IntStream.range(0, str.length()).mapToObj(str::charAt);
     stream.forEach(System.out::println);
@@ -483,6 +484,25 @@ public class StreamTest {
    */
   @Test
   public void test14() {
+
     integers.stream().collect(Collectors.maxBy(Comparator.comparing(i -> i)));
   }
+
+  /**
+   * ThreadLocal
+   */
+  @Test
+  public void test15() {
+
+    ThreadLocal<String> threadLocal = ThreadLocal
+        .withInitial(() -> "abc" + Thread.currentThread().getName());
+    System.out.println(threadLocal.get());
+  }
+
+//  @Test
+//  public void test16() {
+//    List<String> list = mock(List.class);
+//    when(list.size()).thenAnswer(inv -> otherList.size());
+//    assertEquals(3, list.size());
+//  }
 }
