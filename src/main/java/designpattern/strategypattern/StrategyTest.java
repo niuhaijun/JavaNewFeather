@@ -35,7 +35,7 @@ public class StrategyTest {
      */
     Compressor gzipCompressor = new Compressor(GZIPOutputStream::new);
     gzipCompressor.compress(inFile, outFile);
-    
+
     Compressor zipCompressor = new Compressor(ZipOutputStream::new);
     zipCompressor.compress(inFile, outFile);
   }
