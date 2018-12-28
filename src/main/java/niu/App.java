@@ -2,7 +2,10 @@ package niu;
 
 import static java.util.stream.Collectors.toMap;
 
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Stream;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -84,7 +87,39 @@ public class App {
   public void test3() {
 
     Stream<Integer> stream = Stream.of(1, 2, 3, 1);
-    Map<Integer, Integer> map = stream.collect(toMap(key -> key, value -> value, (oldValue, newValue) -> oldValue + newValue));
+    Map<Integer, Integer> map = stream
+        .collect(toMap(key -> key, value -> value, (oldValue, newValue) -> oldValue + newValue));
     System.out.println(map.get(1));
+  }
+
+  @Test
+  public void testHashTablePut() {
+
+    Hashtable<String, String> hashtable = new Hashtable<>();
+    /**
+     * value不能为null
+     */
+//    hashtable.put("", null);
+    /**
+     * key不能为null
+     */
+//    hashtable.put(null, "");
+  }
+
+  @Test
+  public void testHashMapPut() {
+
+    HashMap<String, String> hashMap = new HashMap<>();
+    hashMap.put(null, "");
+    hashMap.put("", null);
+    hashMap.put(null, null);
+  }
+
+  @Test
+  public void testTreeMapPut() {
+
+    TreeMap<String, String> map = new TreeMap<>();
+//    map.put(null, "");
+    map.put("", null);
   }
 }
