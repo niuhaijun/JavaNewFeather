@@ -1,4 +1,4 @@
-package thinkinginjvm.chapter7_虚拟机类加载机制;
+package thinkinginjvm.chapter7;
 
 /**
  * @author niuhaijun
